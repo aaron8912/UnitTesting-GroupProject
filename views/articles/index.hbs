@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+</head>
+<body>
+    <div class="container">
+
+        <a href="/articles/add">Add a new project</a>
+        <h1 class="mb-4">Blog Posts</h1>
+        
+
+        {{#each dataset}}
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="card-title">{{this.title}}</h4>
+                <div class="card-subtitle text-muted mb-2">
+                    {{ this.createdAt}}
+                </div>
+                <div class="card-text mb-2">{{this.description}}</div>
+            </div>
+        {{/each}}
+        </div>
+    </div>
+
+
+</body>
+</html>
