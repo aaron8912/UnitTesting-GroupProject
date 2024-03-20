@@ -11,6 +11,10 @@ var articlesRouter = require('./routes/articles');
 var mongoose = require("mongoose");
 var configs = require("./configs/globals");
 
+var passport = require("passport");
+var session = require("express-session");
+var User = require("./models/user");
+
 var app = express();
 
 // view engine setup
@@ -22,6 +26,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+  session({
+    secret: "groupproject2024",
+    saveUninitialized: false,
+    resave: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 app.use('/', indexRouter);
 app.use('/Articles', articlesRouter);
