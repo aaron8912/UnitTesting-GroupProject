@@ -8,8 +8,10 @@ router.get("/", async (req,res,next) => {
     res.render("articles/index",{ title: "Blog",dataset:articles});
 });
 
+
+
 router.get("/add", (req,res,next) => {
-    res.render("articles/add");
+    res.render("articles/add",{title: "Create A New Article"});
 });
 
 
@@ -22,6 +24,25 @@ router.post("/add", async(req,res,next) => {
     res.redirect("/articles");
 });
 
+router.get("/edit/:_id", async (req,res,next) => {
+    let articleId = req.params._id;
+    let articleData = await Article.findOne({_id: articleId});
+    res.render("articles/edit", {
+        title: "Edit Article",
+        article: articleData
+    });
+});
 
-
+router.post("/edit/:_id", async(req,res,next) => {
+    let articleId = req.params._id;
+    await Article.findOneAndUpdate(
+        {_id: articleId},
+        {
+            title: req.body.title,
+            updatedAt: new Date(),
+            description: req.body.description
+        }
+    );
+    res.redirect("/articles");
+});
 module.exports = router;

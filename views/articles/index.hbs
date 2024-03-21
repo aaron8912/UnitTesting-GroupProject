@@ -8,7 +8,7 @@
 <body>
     <div class="container">
 
-        <a href="/articles/add" class="btn btn-success">Add a new project</a>
+        <a href="/articles/add" class="btn btn-success">Create Article</a>
         <h1 class="mb-4">Blog Posts</h1>
         
 
@@ -17,9 +17,12 @@
             <div class="card-body">
                 <h4 class="card-title">{{this.title}}</h4>
                 <div class="card-subtitle text-muted mb-2">
-                    {{ this.createdAt}}
+                    Created At: {{ toShortDate this.createdAt}}
                 </div>
+                
                 <div class="card-text mb-2">{{this.description}}</div>
+                <a href="/articles/show{{this._id}}" class="btn btn-primary">Read More</a>
+                <a href="/articles/Edit/{{this._id}}" class="btn btn-primary">Edit</a>
             </div>
         {{/each}}
         </div>

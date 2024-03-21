@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var hbs = require("hbs");
 var indexRouter = require('./routes/index');
 var articlesRouter = require('./routes/articles');
 
@@ -49,6 +49,11 @@ mongoose
   .connect(configs.ConnectionStrings.MongoDB)
   .then(() => console.log("Connected!"));
 
+
+  hbs.registerHelper("toShortDate", (longDateValue) => {
+    return new hbs.SafeString(longDateValue.toLocaleDateString("en-CA"));
+  });
+  
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
