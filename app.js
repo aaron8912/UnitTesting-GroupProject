@@ -14,6 +14,7 @@ var configs = require("./configs/globals");
 var passport = require("passport");
 var session = require("express-session");
 var User = require("./models/user");
+var Article = require("./models/article");
 
 var app = express();
 
@@ -70,4 +71,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const port = process.env.PORT || 3000; // Define the port number
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 module.exports = app;
