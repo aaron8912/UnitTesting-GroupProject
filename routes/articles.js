@@ -45,4 +45,10 @@ router.post("/edit/:_id", async(req,res,next) => {
     );
     res.redirect("/articles");
 });
+
+router.get("/delete/:_id", async (req,res,next) => {
+    let articleId = req.params._id;
+    await Article.findOneAndDelete({_id: articleId});
+    res.redirect("/articles");
+})
 module.exports = router;

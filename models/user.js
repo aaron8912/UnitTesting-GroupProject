@@ -11,4 +11,4 @@ var mongooseSchema = mongoose.Schema(dataSchemaObj);
 
 mongooseSchema.plugin(plm);
 
-module.exports = mongoose.model("user", mongooseSchema);
+module.exports = mongoose.model("User", mongooseSchema);
