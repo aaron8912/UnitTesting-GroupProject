@@ -3,7 +3,6 @@ const request = require("supertest");
 const should = require("should");
 
 
-let articleId;
 
 describe("testing the get index method", () => {
   
@@ -78,3 +77,4 @@ describe("Get the register page" , () => {
       });
   });
 });
+

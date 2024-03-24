@@ -23,6 +23,24 @@ describe("Article model unit test", () => {
   });
 });
 
+describe("testing the save method", () => {
+  it("should be able to save without any problems", () => {
+    article.save((err) => {
+      should.not.exist(err);
+    });
+  });
+
+  it("should be able to save an article without a title", () => {
+    article.title = "";
+
+    article.save((err) => {
+      should.exist(err);
+    });
+  });
+});
+
+
+
 describe("User model unit test", () => {
   beforeEach((done) => {
     user = new User({
@@ -38,3 +56,4 @@ describe("User model unit test", () => {
     done();
   });
 });
+

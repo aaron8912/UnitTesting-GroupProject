@@ -1,12 +1,13 @@
-
-  .carousel-container {
-    margin-top: 80px; 
-    max-width: 600px;
-    max-height: 900px;
-  }
-
- 
-  .carousel-image {
-    height: auto; /* Maintain aspect ratio */
-    margin: 0 auto; /* Center the images horizontally */
-  }
+.carousel-item {
+  height:32rem;
+  background:#777;
+  color:white;
+  position:relative;
+}
+.container {
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding-bottom:50px;
+}

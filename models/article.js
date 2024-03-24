@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const articleObj = {
-    title: { type: String, required: true},
+    title: { type: String},
     createdAt: { type:Date, default: Date.now},
     description: {type:String, required: true},
 
