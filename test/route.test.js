@@ -78,3 +78,38 @@ describe("Get the register page" , () => {
   });
 });
 
+describe("Get the edit articles page", () => {
+  it("should be able to get the edit page", (done) => {
+
+    const articleId = "articleId";
+    request(app)
+    .get(`/articles/edit/${articleId}`)
+    .expect("Content-Type", /html/)
+    .expect(200)
+    .end((err, res) => {
+      res.text.should.containEql("<title>Edit Article</title>");
+      
+    })
+
+    request(app)
+    .get(`/articles/edit/${articleId}`);
+    done();
+
+  });
+});
+
+describe("Get the delete article", () => {
+  it("should be able to get the delete article", (done) => {
+
+    const articleId = "articleId";
+    request(app)
+    .get(`/articles/delete/${articleId}`)
+    .expect("Content-Type", /html/)
+    .expect(200)
+
+    request(app)
+    .get(`/articles/delete/${articleId}`);
+    done();
+
+  });
+});
