@@ -11,6 +11,7 @@ var articlesRouter = require('./routes/articles');
 var mongoose = require("mongoose");
 var configs = require("./configs/globals");
 
+
 var passport = require("passport");
 var session = require("express-session");
 var User = require("./models/user");
@@ -50,6 +51,7 @@ mongoose
   .connect(configs.ConnectionStrings.MongoDB)
   .then(() => console.log("Connected!"));
 
+ 
 
   hbs.registerHelper("toShortDate", (longDateValue) => {
     return new hbs.SafeString(longDateValue.toLocaleDateString("en-CA"));

@@ -1,13 +1,19 @@
 const app = require("../app");
-const should = require("should");
+ 
 const mongoose = require("mongoose");
 const Article = mongoose.model("Article");
 const User = mongoose.model("User");
 
+const should = require("should");
+
 let article;
 let user;
 
+
+
 describe("Article model unit test", () => {
+
+  
   beforeEach((done) => {
     article = new Article({
       title: "Title",
@@ -39,6 +45,13 @@ describe("testing the save method", () => {
   });
 });
 
+afterEach(async () => {
+  try {
+    await Article.deleteMany({});
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 
 describe("User model unit test", () => {
@@ -55,5 +68,17 @@ describe("User model unit test", () => {
     user.should.have.property("password").equal("password");
     done();
   });
+
 });
+
+afterEach(async () => {
+  try {
+    await User.deleteMany({});
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+
+
 

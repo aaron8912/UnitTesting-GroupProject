@@ -1,8 +1,13 @@
 const app = require("../app");
 const request = require("supertest");
 const should = require("should");
+const mongoose = require("mongoose");
+const Article = mongoose.model("Article");
 
 
+
+// Testing the /GET Methods
+describe("testing the route /GET Methods", () => {
 
 describe("testing the get index method", () => {
   
@@ -20,6 +25,7 @@ describe("testing the get index method", () => {
   });
 });
 
+// GET add
 describe("Get articles add page" , () => {
 
 
@@ -36,6 +42,7 @@ describe("Get articles add page" , () => {
   });
 });
 
+//GET index
 describe("Get index page" , () => {
   it("should be able to get the home page", (done) => {
     request(app)
@@ -49,6 +56,8 @@ describe("Get index page" , () => {
       });
   });
 });
+
+//GET login
 
 describe("Get the login page" , () => {
   it("should be able to get the login page", (done) => {
@@ -64,6 +73,8 @@ describe("Get the login page" , () => {
   });
 });
 
+//GET register
+
 describe("Get the register page" , () => {
   it("should be able to get the register page", (done) => {
     request(app)
@@ -78,6 +89,7 @@ describe("Get the register page" , () => {
   });
 });
 
+//Get edit (BY ID)
 describe("Get the edit articles page", () => {
   it("should be able to get the edit page", (done) => {
 
@@ -98,6 +110,7 @@ describe("Get the edit articles page", () => {
   });
 });
 
+//GET delete(BY ID)
 describe("Get the delete article", () => {
   it("should be able to get the delete article", (done) => {
 
@@ -111,5 +124,49 @@ describe("Get the delete article", () => {
     .get(`/articles/delete/${articleId}`);
     done();
 
+  });
+});
+});
+
+// Testing the /POST Methods
+describe("testing the POST routes" , () => {
+
+ beforeEach(async () => {
+  await Article.deleteMany({});
+ });
+
+  describe("POST /add" , () => {
+    it("should be able to POST a new article", (done) => {
+
+      // test article object
+      const articleTest = {
+        title: "testArticle",
+        description: "testDescription"
+      };
+      request(app)
+        .post("/articles/add")
+        .expect(302)
+        .send(articleTest)
+        .end((err, res) => {
+          if (err) return done(err);
+          done();
+        });
+    });
+  });
+
+  describe("POST /edit" , () => {
+    it("should be able to POST a new edited article", (done) => {
+      const articleId = "articleId";
+      request(app)
+      .post(`/articles/edit/${articleId}`)
+      .expect("Content-Type", /html/)
+      .expect(200)
+      .end((err, res) => {
+        res.text.should.containEql("<title>Edit Article</title>"); 
+      });
+      request(app)
+      .get(`/articles/edit/${articleId}`);
+      done();
+    });
   });
 });
