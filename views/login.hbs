@@ -1,37 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-  
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-md-6 offset-md-3">
-        <h2 class="mb-4">Login</h2>
-        <form>
-          <div class="form-group">
-            <label for="username">Email:</label>
-            <input type="username" class="form-control" id="username"required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-            <small id="passwordHelp" class="form-text text-muted">Password must be at least 8 characters long and contain at least one digit, one lowercase letter, and one uppercase letter.</small>
-          </div>
-          <div class="form-group">
-            Need an account?
-            <a href="/register">Register</a>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="mb-4">Login</h2>
+      <form>
+        <div class="form-group">
+          <label for="username">Email:</label>
+          <input type="username" class="form-control" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            required>
+          <small id="passwordHelp" class="form-text text-muted">Password must be at least 8 characters long and contain
+            at least one digit, one lowercase letter, and one uppercase letter.</small>
+        </div>
+        <div class="form-group">
+          Need an account?
+          <a href="/register">Register</a>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
 
-        </form>
-      </div>
+      </form>
     </div>
   </div>
-
-</body>
-</html>
+</div>
