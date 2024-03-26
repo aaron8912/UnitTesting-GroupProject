@@ -7,10 +7,5 @@ const articleObj = {
 
 }
 
-
-
 const mongooseSchema = mongoose.Schema(articleObj);
-
-
-
 module.exports = mongoose.model("Article", mongooseSchema);
