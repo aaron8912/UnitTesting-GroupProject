@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog App</title>
-</head>
-<body>
-    <div class="container">
+<div class="container">
+    <a href="/articles/add" class="btn btn-success">Create Article</a>
+    <h1 class="display-1 mb-4">Blog Posts</h1>
 
-        <a href="/articles/add" class="btn btn-success">Create Article</a>
-        <h1 class="display-1 mb-4">Blog Posts</h1>
-        
+
 
         {{#each dataset}}
         <div class="card mt-4">
@@ -23,11 +15,13 @@
                 <div class="card-text mb-2">{{this.description}}</div>
                 <a href="/articles/Delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDeletion()">Delete</a>
                 <a href="/articles/Edit/{{this._id}}" class="btn btn-primary">Edit</a>
+=======
             </div>
-        {{/each}}
+
+            <div class="card-text mb-2">{{this.description}}</div>
+            <a href="/articles/Delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDeletion()">Delete</a>
+            <a href="/articles/Edit/{{this._id}}" class="btn btn-primary">Edit</a>
         </div>
+        {{/each}}
     </div>
-
-
-</body>
-</html>
+</div>
