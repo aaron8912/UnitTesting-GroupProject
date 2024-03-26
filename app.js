@@ -51,6 +51,9 @@ mongoose
   .connect(configs.ConnectionStrings.MongoDB)
   .then(() => console.log("Connected!"));
 
+  if (process.env.NODE_ENV === "testing") {
+    database = process.env.MONGO_URI_TEST;
+  }
  
 
   hbs.registerHelper("toShortDate", (longDateValue) => {

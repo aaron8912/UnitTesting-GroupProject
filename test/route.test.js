@@ -4,10 +4,9 @@ const should = require("should");
 const mongoose = require("mongoose");
 const Article = mongoose.model("Article");
 
-
-
 // Testing the /GET Methods
 describe("testing the route /GET Methods", () => {
+ 
 
 describe("testing the get index method", () => {
   
