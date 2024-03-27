@@ -1,37 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register Page</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-  
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-md-6 offset-md-3">
-        <h2 class="mb-4">Register</h2>
-        <form>
-          <div class="form-group">
-            <label for="username">Email:</label>
-            <input type="username" class="form-control" id="username"required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-            <small id="passwordHelp" class="form-text text-muted">Password must be at least 8 characters long and contain at least one digit, one lowercase letter, and one uppercase letter.</small>
-          </div>
-          <div class="form-group">
-            Already have an account?
-            <a href="/login">Login</a>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-
-        </form>
-      </div>
-    </div>
-  </div>
-
-</body>
-</html>
+<h1>
+  Register
+</h1>
+<form method="post">
+  <fieldset class="form-group">
+    <label for="username" class="col-2 control-label">
+      Username: *
+    </label>
+    <input
+      name="username"
+      id="username"
+      required
+      type="email"
+      placeholder="email@email.com"
+    />
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="password" class="col-2 control-label">
+      Password: *
+    </label>
+    <input
+      name="password"
+      id="password"
+      type="password"
+      required
+      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+    />
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="confirm" class="col-2 control-label">
+      Confirm: *
+    </label>
+    <input
+      name="confirm"
+      id="confirm"
+      type="password"
+      required
+      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+    />
+  </fieldset>
+  <fieldset class="form-group">
+    <button class="btn btn-info offset-3">
+      Register
+    </button>
+    <hr />
+    Already have an account?
+    <a href="/login" title="Login">
+      Login
+    </a>
+  </fieldset>
+</form>

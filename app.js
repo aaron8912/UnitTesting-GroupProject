@@ -14,6 +14,7 @@ var configs = require("./configs/globals");
 
 var passport = require("passport");
 var session = require("express-session");
+
 var User = require("./models/user");
 var Article = require("./models/article");
 
@@ -39,6 +40,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

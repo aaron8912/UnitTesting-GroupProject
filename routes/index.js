@@ -4,16 +4,15 @@ const User = require("../models/user");
 const passport = require("passport");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Everyday Insights' });
+router.get('/', function (req, res, next) {
+  res.render('index', { title: 'Everyday Insights', user:req.user });
 });
 
-router.get("/login", (req,res,next) => {
+router.get("/login", (req, res, next) => {
   let messages = req.session.messages || [];
   req.session.messages = [];
   res.render("login", { title: "Login", messages: messages});
 });
-
 
 router.post("/login", passport.authenticate("local", {
   successRedirect: "/articles",
@@ -25,26 +24,28 @@ router.get("/register", (req, res, next) => {
   res.render("register", { title: "Create a new account" });
 });
 
-router.post("/register", (req,res,next) => {
+router.post("/register", (req, res, next) => {
   User.register(
-    new User({
-      username: req.body.username,
-    }),
+    new User({ username: req.body.username}),
     req.body.password,
-    (err, newUser) => {
+    function (err, newUser) {
       if (err) {
         console.log(err);
-        // take user back and reload register page
-        return res.redirect("/register");
+        res.render("error", { message: "registration information is not valid"});
       } else {
-        // log user in and redirect
-        req.login(newUser, (err) => {
+        req.login(newUser, function(err) {
           res.redirect("/articles");
         });
       }
     }
   );
 });
+
+router.get("/logout", (req,res,next) => {
+  req.logout((err) => { res.redirect("/login")});
+});
+
+
 
 
 module.exports = router;
