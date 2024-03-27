@@ -4,10 +4,10 @@ const should = require("should");
 const mongoose = require("mongoose");
 const Article = mongoose.model("Article");
 
-// Testing the /GET Methods
+// Testing the /GET requests
 describe("testing the route /GET Methods", () => {
  
-
+// GET articles index
 describe("testing the get index method", () => {
   
   it("should be able to get the articles index page", (done) => {
@@ -24,7 +24,7 @@ describe("testing the get index method", () => {
   });
 });
 
-// GET add
+// GET articles add
 describe("Get articles add page" , () => {
 
 
@@ -41,7 +41,7 @@ describe("Get articles add page" , () => {
   });
 });
 
-//GET index
+//GET index(home page)
 describe("Get index page" , () => {
   it("should be able to get the home page", (done) => {
     request(app)

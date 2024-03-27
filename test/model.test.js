@@ -1,23 +1,28 @@
 const app = require("../app");
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); 
 const Article = mongoose.model("Article");
 const User = mongoose.model("User");
 const should = require("should");
 const configurations = require("../configs/globals");
 
+// import mongodb in-memory server module for testing
 const { MongoMemoryServer } = require("mongodb-memory-server");
 
+// variables made from mongserver, article, user instances
 let mongoServer;
 let article;
 let user;
+
+// before any test is run, the in-memory test database is set up
 before(async () => { 
   const mongoUri = configurations.ConnectionStrings.mongoDBTest;
   console.log("connecting to test mongodb");
+  // ensures that the original database is disconnected when running the tests
   await mongoose.disconnect();
 
   mongoServer = await MongoMemoryServer.create();
 
-  
+  // connects to the in-memory database
   await mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -26,6 +31,7 @@ before(async () => {
 
 describe("Article model unit test", () => {
   
+  // initializes article instance
   beforeEach((done) => {
     article = new Article({
       title: "Title",
@@ -34,6 +40,7 @@ describe("Article model unit test", () => {
     done();
   });
 
+  // checks for article properties 
   it("should have title and description properties set correctly", (done) => {
     article.should.have.property("title").equal("Title");
     article.should.have.property("description").equal("Article Description");
@@ -58,7 +65,7 @@ describe("testing the save method", () => {
 });
 
 
-
+// after each of the tests, every instance of article is cleared
 afterEach(async () => {
   try {
     await Article.deleteMany({});
@@ -77,6 +84,7 @@ describe("User model unit test", () => {
     done();
   });
 
+  // checks for user properties
   it("should have username and password properties set correctly", (done) => {
     user.should.have.property("username").equal("username");
     user.should.have.property("password").equal("password");
@@ -85,6 +93,7 @@ describe("User model unit test", () => {
 
 });
 
+// after each of the tests, every instance of user is cleared
 afterEach(async () => {
   try {
     await User.deleteMany({});
@@ -92,7 +101,7 @@ afterEach(async () => {
     console.error(err);
   }
 });
-
+// after all the tests are run, this will disconnect from the database and stop the server
 after(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
