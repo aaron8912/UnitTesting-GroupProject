@@ -1,9 +1,8 @@
 <div class="container">
+    {{#if user}}
     <a href="/articles/add" class="btn btn-success">Create Article</a>
+    {{/if}}
     <h1 class="display-1 mb-4">Blog Posts</h1>
-
-
-
         {{#each dataset}}
         <div class="card mt-4">
             <div class="card-body">
@@ -11,12 +10,17 @@
                 <div class="card-subtitle text-muted mb-2">
                     Created At: {{ toShortDate this.createdAt}}
                 </div>
-                
+                 
                 <div class="card-text mb-2">{{this.description}}</div>
+               <div>
+                {{#if ../user}}
                 <a href="/articles/Delete/{{this._id}}" class="btn btn-danger" onclick="return confirmDeletion()">Delete</a>
                 <a href="/articles/Edit/{{this._id}}" class="btn btn-primary">Edit</a>
+                {{/if}}
+                </div>
             </div>
 
         {{/each}}
     </div>
 </div>
+
