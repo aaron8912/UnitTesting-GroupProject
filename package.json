@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm app.js",
+    "start": "npm start app.js",
     "test": "mocha --timeout 5000"
   },
   "dependencies": {
