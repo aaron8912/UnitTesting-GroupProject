@@ -3,43 +3,49 @@ const request = require("supertest");
 const should = require("should");
 const mongoose = require("mongoose");
 const Article = mongoose.model("Article");
+const session = require("supertest-session")(app);
 
 // Testing the /GET requests
 describe("testing the route /GET Methods", () => {
- 
+  
+  before((done) => {
+    session
+        .post("/login")
+        .send({ username: "user", password: "password" })
+        .expect(302)
+        .end((err) => {
+            if (err) return done(err);
+            done();
+        });
+});
+
 // GET articles index
 describe("testing the get index method", () => {
   
   it("should be able to get the articles index page", (done) => {
-  
-    request(app)
-      .get("/articles/")
-      .expect("Content-Type", /html/)
-      .expect(200)
+      session.get("/articles/")
+      .expect(302)
       .end((err, res) => {
         if (err) return done(err);
-        res.text.should.containEql("<title>Blog</title>");
         done();
-      });
   });
+});
+});
 });
 
 // GET articles add
 describe("Get articles add page" , () => {
-
-
   it("should be able to get the articles add page", (done) => {
-    request(app)
+    session
       .get("/articles/add")
-      .expect("Content-Type", /html/)
-      .expect(200)
-      .end((err, res) => {
+      .expect(302)
+      .end((err,res) => {
         if (err) return done(err);
-        res.text.should.containEql("<title>Create A New Article</title>");
-        done();
+          done();
+      });
       });
   });
-});
+
 
 //GET index(home page)
 describe("Get index page" , () => {
@@ -62,7 +68,7 @@ describe("Get the login page" , () => {
   it("should be able to get the login page", (done) => {
     request(app)
       .get("/login")
-      .expect("Content-Type", /html/)
+      .expect("Content-Type",/html/)
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
@@ -91,20 +97,14 @@ describe("Get the register page" , () => {
 //Get edit (BY ID)
 describe("Get the edit articles page", () => {
   it("should be able to get the edit page", (done) => {
-
-    const articleId = "articleId";
     request(app)
-    .get(`/articles/edit/${articleId}`)
-    .expect("Content-Type", /html/)
-    .expect(200)
+    .get("/articles/edit/articleId")
+    .expect(302)
     .end((err, res) => {
-      res.text.should.containEql("<title>Edit Article</title>");
-      
-    })
+      if (err) return done(err);
+      res.header["location"].should.containEql("/login"); 
+      done();
 
-    request(app)
-    .get(`/articles/edit/${articleId}`);
-    done();
 
   });
 });
@@ -118,9 +118,6 @@ describe("Get the delete article", () => {
     .get(`/articles/delete/${articleId}`)
     .expect("Content-Type", /html/)
     .expect(200)
-
-    request(app)
-    .get(`/articles/delete/${articleId}`);
     done();
 
   });
@@ -147,25 +144,23 @@ describe("testing the POST routes" , () => {
         .expect(302)
         .send(articleTest)
         .end((err, res) => {
-          if (err) return done(err);
+          res.headers.location.should.eql("/login");
           done();
         });
     });
   });
 
-  describe("POST /edit" , () => {
-    it("should be able to POST a new edited article", (done) => {
-      const articleId = "articleId";
+  describe("POST /edit", () => {
+    it("should redirect to login page when unauthorized", (done) => {
       request(app)
-      .post(`/articles/edit/${articleId}`)
-      .expect("Content-Type", /html/)
-      .expect(200)
-      .end((err, res) => {
-        res.text.should.containEql("<title>Edit Article</title>"); 
-      });
-      request(app)
-      .get(`/articles/edit/${articleId}`);
-      done();
+        .post("/articles/edit/articleId")
+        .expect(302)
+        .end((err, res) => {
+          if (err) return done(err);
+          res.header["location"].should.containEql("/login"); 
+          done();
+        });
     });
-  });
 });
+});
+

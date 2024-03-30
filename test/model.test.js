@@ -29,6 +29,7 @@ before(async () => {
   });
 });
 
+
 describe("Article model unit test", () => {
   
   // initializes article instance
