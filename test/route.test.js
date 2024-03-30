@@ -8,6 +8,7 @@ const session = require("supertest-session")(app);
 // Testing the /GET requests
 describe("testing the route /GET Methods", () => {
   
+  // creates a user to run
   before((done) => {
     session
         .post("/login")
@@ -152,8 +153,9 @@ describe("testing the POST routes" , () => {
 
   describe("POST /edit", () => {
     it("should redirect to login page when unauthorized", (done) => {
+      const articleId = "articleId";
       request(app)
-        .post("/articles/edit/articleId")
+        .post(`/articles/delete/${articleId}`)
         .expect(302)
         .end((err, res) => {
           if (err) return done(err);
