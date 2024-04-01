@@ -10,14 +10,35 @@ body {
   color: black;
   padding: 100px 0;
 }
-
-
+fieldset {
+  border: none;
+  text-align: center;
+  padding: 20px;
+}
+fieldset.form-group {
+margin-bottom:20px;
+}
+fieldset label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.card.mt-4 {
+  margin-bottom: 10px;
+}
+fieldset input{
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 .column-border {
   border: 1px solid #ccc; 
   padding: 15px; 
   border-radius: 5px; 
 }
-
+h1 {
+  text-align: center;
+}
 footer {
   
   margin-top: auto; 
